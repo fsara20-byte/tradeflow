@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TradeFlow — Trade Receivables Marketplace</title>
+  <meta name="description" content="TradeFlow is a serious investor-facing concept for a regulated marketplace connecting verified trade receivables with qualified capital." />
+  <meta name="theme-color" content="#111827" />
+  <meta property="og:title" content="TradeFlow — Trade Receivables Marketplace" />
+  <meta property="og:description" content="Verified trade receivables. Structured access for qualified capital. Built for regulated deployment." />
+  <style>
+    :root{
+      --ink:#111827;
+      --muted:#5B6472;
+      --soft:#F4F1EA;
+      --paper:#FFFFFF;
+      --line:#DED8CE;
+      --sand:#E8DFD1;
+      --gold:#A77A2D;
+      --gold-dark:#7A541A;
+      --charcoal:#1F2937;
+      --cream:#FBF8F2;
+      --slate:#374151;
+      --danger:#7F1D1D;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;color:var(--ink);background:var(--cream);line-height:1.55}
+    button,a{font:inherit}
+    a{text-decoration:none;color:inherit}
+    .container{width:min(1180px, calc(100% - 40px));margin:0 auto}
+    .site-header{position:sticky;top:0;z-index:50;background:rgba(251,248,242,.96);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+    .nav{height:74px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+    .brand{font-family:Georgia, "Times New Roman", serif;font-size:26px;font-weight:700;letter-spacing:-.02em;color:var(--ink)}
+    .brand span{color:var(--gold)}
+    .main-nav{display:flex;gap:22px;align-items:center}
+    .main-nav a{font-size:13px;font-weight:650;color:var(--muted)}
+    .main-nav a:hover{color:var(--ink)}
+    .portal-actions{display:flex;align-items:center;gap:8px}
+    .portal-actions button{border:1px solid var(--line);background:var(--paper);color:var(--ink);padding:9px 12px;border-radius:999px;font-size:12px;font-weight:700;cursor:pointer}
+    .portal-actions button:hover{border-color:var(--gold);color:var(--gold-dark)}
+    .mobile-toggle{display:none;border:1px solid var(--line);background:var(--paper);padding:8px 10px;border-radius:8px;font-weight:700;cursor:pointer}
+    .hero{padding:76px 0 54px;background:
+      radial-gradient(circle at 85% 10%, rgba(167,122,45,.16), transparent 28%),
+      linear-gradient(180deg,#FBF8F2 0%,#F1ECE3 100%);
+      border-bottom:1px solid var(--line)
+    }
+    .hero-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:54px;align-items:center}
+    .eyebrow{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:999px;padding:7px 12px;background:rgba(255,255,255,.58);font-size:12px;font-weight:750;letter-spacing:.04em;text-transform:uppercase;color:var(--gold-dark);margin-bottom:18px}
+    h1{font-family:Georgia, "Times New Roman", serif;font-size:58px;line-height:1.03;letter-spacing:-.045em;font-weight:700;color:var(--ink);max-width:780px}
+    .hero-copy{font-size:18px;color:var(--slate);margin:24px 0 30px;max-width:680px}
+    .hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+    .btn{display:inline-flex;align-items:center;justify-content:center;border-radius:999px;padding:13px 20px;border:1px solid transparent;font-size:14px;font-weight:800;cursor:pointer;transition:.18s ease}
+    .btn-primary{background:var(--ink);color:#fff}
+    .btn-primary:hover{background:#000;transform:translateY(-1px)}
+    .btn-secondary{background:transparent;border-color:var(--gold);color:var(--gold-dark)}
+    .btn-secondary:hover{background:rgba(167,122,45,.08)}
+    .btn-light{background:#fff;border-color:var(--line);color:var(--ink)}
+    .btn-light:hover{border-color:var(--gold);color:var(--gold-dark)}
+    .hero-card{background:var(--paper);border:1px solid var(--line);border-radius:24px;box-shadow:0 30px 80px rgba(17,24,39,.10);overflow:hidden}
+    .hero-card-top{padding:28px;background:var(--ink);color:#fff}
+    .hero-card-label{font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:#D6C7A6;font-weight:800;margin-bottom:12px}
+    .transaction-title{font-size:22px;font-family:Georgia, "Times New Roman", serif;line-height:1.2}
+    .transaction-grid{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid rgba(255,255,255,.12);margin-top:24px;padding-top:18px;gap:12px}
+    .transaction-grid div span{display:block;font-size:11px;color:#C8CED8;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px}
+    .transaction-grid strong{font-size:20px}
+    .hero-card-body{padding:28px}
+    .process-step{display:grid;grid-template-columns:32px 1fr;gap:14px;padding:16px 0;border-bottom:1px solid var(--line)}
+    .process-step:last-child{border-bottom:0;padding-bottom:0}
+    .step-num{width:32px;height:32px;border-radius:50%;background:var(--soft);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-weight:850;color:var(--gold-dark);font-size:12px}
+    .process-step h3{font-size:14px;margin-bottom:4px}
+    .process-step p{font-size:13px;color:var(--muted)}
+    .logos{padding:18px 0;border-bottom:1px solid var(--line);background:var(--paper)}
+    .logo-line{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.12em;font-weight:850}
+    section{padding:78px 0}
+    .section-head{display:flex;align-items:end;justify-content:space-between;gap:28px;margin-bottom:32px}
+    .section-kicker{font-size:12px;font-weight:850;color:var(--gold-dark);letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px}
+    h2{font-family:Georgia, "Times New Roman", serif;font-size:42px;line-height:1.08;letter-spacing:-.035em}
+    .section-sub{max-width:560px;color:var(--muted);font-size:16px}
+    .card-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .card{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:26px}
+    .card .label{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-dark);font-weight:850;margin-bottom:14px}
+    .card h3{font-size:20px;margin-bottom:10px}
+    .card p{color:var(--muted);font-size:15px}
+    .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;background:var(--ink);border-radius:22px;overflow:hidden;color:#fff}
+    .stat{padding:28px;border-right:1px solid rgba(255,255,255,.12)}
+    .stat:last-child{border-right:0}
+    .stat span{display:block;color:#D6C7A6;font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:850;margin-bottom:8px}
+    .stat strong{font-family:Georgia, "Times New Roman", serif;font-size:34px}
+    .stat p{font-size:13px;color:#C8CED8;margin-top:6px}
+    .split{display:grid;grid-template-columns:.9fr 1.1fr;gap:28px;align-items:start}
+    .panel{background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:30px}
+    .table{width:100%;border-collapse:collapse;overflow:hidden}
+    .table th,.table td{text-align:left;padding:14px 12px;border-bottom:1px solid var(--line);font-size:14px}
+    .table th{font-size:11px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase}
+    .table tr:last-child td{border-bottom:0}
+    .tag{display:inline-block;padding:5px 9px;border:1px solid var(--line);border-radius:999px;font-size:12px;font-weight:750;background:var(--cream)}
+    .risk-list{display:grid;gap:14px}
+    .risk-item{display:grid;grid-template-columns:140px 1fr;gap:16px;border-bottom:1px solid var(--line);padding-bottom:14px}
+    .risk-item:last-child{border-bottom:0;padding-bottom:0}
+    .risk-item strong{font-size:14px}
+    .risk-item p{color:var(--muted);font-size:14px}
+    .cta-band{background:var(--ink);color:#fff;border-radius:28px;padding:44px;display:grid;grid-template-columns:1.2fr .8fr;gap:30px;align-items:center}
+    .cta-band h2{color:#fff}
+    .cta-band p{color:#D1D5DB;margin-top:12px}
+    .cta-band .btn-secondary{border-color:#D6C7A6;color:#F4E5C0}
+    .site-footer{padding:34px 0;border-top:1px solid var(--line);color:var(--muted);font-size:13px}
+    .footer-grid{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+    .portal-view{display:none;min-height:100vh;background:var(--cream)}
+    .portal-header{background:var(--paper);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:60}
+    .portal-nav{height:70px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .portal-title{font-weight:850}
+    .portal-page{padding:42px 0 70px}
+    .portal-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px;margin-top:24px}
+    .metric{background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px}
+    .metric span{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-weight:850;margin-bottom:8px}
+    .metric strong{font-family:Georgia, "Times New Roman", serif;font-size:30px}
+    .deal-list{display:grid;gap:14px;margin-top:24px}
+    .deal-row{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px;display:grid;grid-template-columns:1.2fr repeat(4,.6fr) auto;gap:16px;align-items:center}
+    .deal-row small{display:block;color:var(--muted);font-size:12px;margin-top:3px}
+    .deal-row strong{font-size:15px}
+    .toast{position:fixed;right:22px;bottom:22px;background:var(--ink);color:#fff;padding:14px 18px;border-radius:12px;box-shadow:0 16px 40px rgba(0,0,0,.18);font-size:14px;font-weight:750;opacity:0;transform:translateY(20px);transition:.22s ease;z-index:100}
+    .toast.show{opacity:1;transform:translateY(0)}
+    .disclaimer{font-size:12px;color:var(--muted);margin-top:18px}
+    @media(max-width:980px){
+      .main-nav{display:none}
+      .mobile-toggle{display:inline-flex}
+      .portal-actions{display:none;position:absolute;left:20px;right:20px;top:74px;background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:12px;flex-direction:column;align-items:stretch;box-shadow:0 20px 50px rgba(17,24,39,.12)}
+      .portal-actions.open{display:flex}
+      .portal-actions button{width:100%;border-radius:10px}
+      .hero-grid,.split,.cta-band{grid-template-columns:1fr}
+      h1{font-size:44px}
+      h2{font-size:34px}
+      .card-grid,.portal-grid{grid-template-columns:1fr}
+      .stats{grid-template-columns:1fr 1fr}
+      .stat:nth-child(2){border-right:0}
+      .stat:nth-child(1),.stat:nth-child(2){border-bottom:1px solid rgba(255,255,255,.12)}
+      .deal-row{grid-template-columns:1fr 1fr;gap:12px}
+      .deal-row .btn{grid-column:1/-1}
+    }
+    @media(max-width:620px){
+      .container{width:min(100% - 28px,1180px)}
+      .nav{height:auto;min-height:66px}
+      .hero{padding:48px 0 38px}
+      h1{font-size:36px}
+      .hero-copy{font-size:16px}
+      .transaction-grid,.stats{grid-template-columns:1fr}
+      .stat{border-right:0;border-bottom:1px solid rgba(255,255,255,.12)}
+      .stat:last-child{border-bottom:0}
+      .section-head{display:block}
+      section{padding:54px 0}
+      .risk-item{grid-template-columns:1fr}
+      .cta-band{padding:30px}
+      .portal-nav{height:auto;padding:14px 0;align-items:flex-start;flex-direction:column}
+    }
+  </style>
+</head>
+<body>
+  <div id="website">
+    <header class="site-header">
+      <div class="container nav">
+        <a class="brand" href="#top">Trade<span>Flow</span></a>
+        <nav class="main-nav" aria-label="Main navigation">
+          <a href="#approach">Approach</a>
+          <a href="#platform">Platform</a>
+          <a href="#investors">Investors</a>
+          <a href="#risk">Risk</a>
+          <a href="#contact">Contact</a>
+        </nav>
+        <div class="portal-actions" id="portalActions">
+          <button type="button" onclick="openPortal('investor')">Investor Portal</button>
+          <button type="button" onclick="openPortal('sme')">SME Portal</button>
+          <button type="button" onclick="openPortal('bank')">Bank Partner</button>
+        </div>
+        <button class="mobile-toggle" type="button" onclick="toggleMenu()">Menu</button>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="container hero-grid">
+          <div>
+            <div class="eyebrow">Designed for regulated deployment in ADGM</div>
+            <h1>Verified trade receivables, structured for qualified capital.</h1>
+            <p class="hero-copy">TradeFlow is a marketplace concept that converts confirmed invoice receivables into professionally structured investment opportunities, giving suppliers earlier liquidity and investors access to short-duration trade credit.</p>
+            <div class="hero-actions">
+              <button class="btn btn-primary" onclick="scrollToSection('platform')">Explore the platform</button>
+              <button class="btn btn-secondary" onclick="openPortal('investor')">View investor portal</button>
+            </div>
+            <p class="disclaimer">Concept website for demonstration and fundraising discussion. Licensing, product terms and investor eligibility would require formal regulatory approval.</p>
+          </div>
+
+          <aside class="hero-card" aria-label="Illustrative transaction">
+            <div class="hero-card-top">
+              <div class="hero-card-label">Illustrative transaction</div>
+              <div class="transaction-title">A supplier with a confirmed AED 1,000,000 receivable receives liquidity before the buyer's payment date.</div>
+              <div class="transaction-grid">
+                <div><span>Face value</span><strong>AED 1.0M</strong></div>
+                <div><span>Tenor</span><strong>90 days</strong></div>
+                <div><span>Advance</span><strong>90%</strong></div>
+              </div>
+            </div>
+            <div class="hero-card-body">
+              <div class="process-step">
+                <div class="step-num">01</div>
+                <div><h3>Verify the receivable</h3><p>Invoice, purchase order, delivery evidence and buyer confirmation are reviewed before listing.</p></div>
+              </div>
+              <div class="process-step">
+                <div class="step-num">02</div>
+                <div><h3>Assign into a ring-fenced vehicle</h3><p>The receivable is structured through an SPV so investor claims are separated from platform operating risk.</p></div>
+              </div>
+              <div class="process-step">
+                <div class="step-num">03</div>
+                <div><h3>Distribute to eligible capital</h3><p>Investors choose deals by tenor, buyer quality, yield and risk category.</p></div>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <div class="logos">
+        <div class="container logo-line">
+          <span>Receivables</span>
+          <span>SPV structure</span>
+          <span>Buyer confirmation</span>
+          <span>Investor access</span>
+          <span>Risk monitoring</span>
+        </div>
+      </div>
+
+      <section id="approach">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <div class="section-kicker">Approach</div>
+              <h2>A serious alternative to generic invoice financing.</h2>
+            </div>
+            <p class="section-sub">The platform is designed around receivable verification, legal assignment, investor suitability and controlled risk allocation. It is not a crypto app and not a simple invoice scoring tool.</p>
+          </div>
+          <div class="card-grid">
+            <div class="card">
+              <div class="label">For suppliers</div>
+              <h3>Earlier liquidity</h3>
+              <p>SMEs can submit confirmed receivables and receive an advance after document checks, buyer confirmation and pricing approval.</p>
+            </div>
+            <div class="card">
+              <div class="label">For investors</div>
+              <h3>Short-duration credit access</h3>
+              <p>Eligible investors can access receivable-backed opportunities by buyer quality, duration and target return profile.</p>
+            </div>
+            <div class="card">
+              <div class="label">For banks</div>
+              <h3>Referral and distribution channel</h3>
+              <p>Banks can refer small-ticket trade finance opportunities that may not fit their balance sheet economics.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="platform" style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <div class="section-kicker">Platform</div>
+              <h2>Built like a market infrastructure layer.</h2>
+            </div>
+            <p class="section-sub">Each receivable is treated as a financial asset with documentation, risk controls, investor disclosures and repayment tracking.</p>
+          </div>
+          <div class="stats">
+            <div class="stat"><span>Market opportunity</span><strong>$9T</strong><p>Global trade finance market referenced in the deck.</p></div>
+            <div class="stat"><span>Financing gap</span><strong>$2.5T</strong><p>Annual global trade finance gap.</p></div>
+            <div class="stat"><span>Target duration</span><strong>30–120d</strong><p>Shorter than private credit funds.</p></div>
+            <div class="stat"><span>Target access</span><strong>Qualified</strong><p>Investor suitability required before deal access.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="investors">
+        <div class="container split">
+          <div>
+            <div class="section-kicker">Investor access</div>
+            <h2>Clear product tiers, not vague yield promises.</h2>
+            <p class="section-sub" style="margin-top:16px">The investor experience should feel like private credit infrastructure: deal terms, buyer quality, reserve treatment, maturity, fees and risk notes shown before allocation.</p>
+            <div class="hero-actions" style="margin-top:24px">
+              <button class="btn btn-primary" onclick="openPortal('investor')">Open investor demo</button>
+              <button class="btn btn-light" onclick="scrollToSection('risk')">Review risk controls</button>
+            </div>
+          </div>
+          <div class="panel">
+            <table class="table">
+              <thead><tr><th>Category</th><th>Illustrative access</th><th>Focus</th></tr></thead>
+              <tbody>
+                <tr><td>Qualified individuals</td><td><span class="tag">Deal-by-deal</span></td><td>Short-duration receivables</td></tr>
+                <tr><td>Family offices</td><td><span class="tag">Curated pools</span></td><td>Yield and diversification</td></tr>
+                <tr><td>Institutional capital</td><td><span class="tag">Structured allocation</span></td><td>Scale, controls and reporting</td></tr>
+                <tr><td>Bank treasury</td><td><span class="tag">Low-risk pools</span></td><td>High-quality obligors</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section id="risk" style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+        <div class="container split">
+          <div>
+            <div class="section-kicker">Risk architecture</div>
+            <h2>Investor confidence depends on controls, not design language.</h2>
+          </div>
+          <div class="panel risk-list">
+            <div class="risk-item"><strong>Receivable fraud</strong><p>Buyer confirmation, duplicate detection and assignment checks before any receivable is listed.</p></div>
+            <div class="risk-item"><strong>Buyer default</strong><p>Exposure limits, buyer scoring, reserves and optional insurance for selected pools.</p></div>
+            <div class="risk-item"><strong>Platform insolvency</strong><p>SPV separation, ring-fenced accounts and backup servicing plan.</p></div>
+            <div class="risk-item"><strong>Regulatory risk</strong><p>RegLab-first path, legal opinions and product classification before launch.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact">
+        <div class="container cta-band">
+          <div>
+            <div class="section-kicker" style="color:#D6C7A6">Next step</div>
+            <h2>Use the portal demos or review the platform sections.</h2>
+            <p>The homepage is now structured like a company website first, with portal demos accessible from the top-right and CTA buttons.</p>
+          </div>
+          <div class="hero-actions" style="justify-content:flex-end">
+            <button class="btn btn-secondary" onclick="openPortal('sme')">SME portal</button>
+            <button class="btn btn-primary" style="background:#fff;color:var(--ink)" onclick="openPortal('bank')">Bank partner</button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div><strong>TradeFlow</strong><br />Trade receivables marketplace concept.</div>
+        <div>Not an offer to sell securities. Demo content only. Regulatory approvals would be required before launch.</div>
+      </div>
+    </footer>
+  </div>
+
+  <div id="portal" class="portal-view">
+    <header class="portal-header">
+      <div class="container portal-nav">
+        <div>
+          <a class="brand" href="#" onclick="returnHome()">Trade<span>Flow</span></a>
+          <div class="portal-title" id="portalTitle">Portal</div>
+        </div>
+        <div class="hero-actions">
+          <button class="btn btn-light" onclick="returnHome()">Back to website</button>
+          <button class="btn btn-primary" onclick="showToast('Demo action only. Connect this button to the real onboarding flow when ready.')">Continue</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="portal-page">
+      <div class="container">
+        <div class="section-kicker" id="portalKicker">Portal demo</div>
+        <h2 id="portalHeading">Portal</h2>
+        <p class="section-sub" id="portalIntro" style="margin-top:12px"></p>
+        <div class="portal-grid" id="portalMetrics"></div>
+        <div class="deal-list" id="portalRows"></div>
+      </div>
+    </main>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    const portalData = {
+      investor: {
+        title: 'Investor Portal',
+        kicker: 'Qualified capital',
+        heading: 'Browse verified receivable opportunities.',
+        intro: 'A serious portal should show the deal, buyer, tenor, target return, risk grade and disclosure before allowing allocation.',
+        metrics: [
+          ['Available opportunities','18'],
+          ['Illustrative average yield','8.4%'],
+          ['Average tenor','82 days']
+        ],
+        rows: [
+          ['Government-linked receivable','AED 3.2M','90 days','5.8% target','View deal'],
+          ['Corporate supply chain receivable','AED 1.8M','90 days','7.2% target','View deal'],
+          ['Healthcare procurement receivable','AED 2.1M','60 days','6.4% target','View deal']
+        ]
+      },
+      sme: {
+        title: 'SME Portal',
+        kicker: 'Supplier liquidity',
+        heading: 'Submit a verified receivable for review.',
+        intro: 'The SME journey should be simple: company details, documents, invoice upload, buyer confirmation, pricing and disbursement.',
+        metrics: [
+          ['Illustrative advance','90%'],
+          ['Target decision time','48h'],
+          ['Documents required','4']
+        ],
+        rows: [
+          ['Company verification','Trade licence and ownership details','Required','Pending','Start'],
+          ['Receivable documents','Invoice, PO and delivery evidence','Required','Pending','Upload'],
+          ['Buyer confirmation','Payment obligation and notice of assignment','Required','Pending','Send request']
+        ]
+      },
+      bank: {
+        title: 'Bank Partner Portal',
+        kicker: 'Institutional origination',
+        heading: 'Refer SME receivables without turning away the relationship.',
+        intro: 'A bank partner flow should help banks refer small-ticket receivables, track status and preserve client relationships.',
+        metrics: [
+          ['Referral pipeline','47 deals'],
+          ['Illustrative referred volume','AED 42.3M'],
+          ['Direct balance sheet use','None on referral-only']
+        ],
+        rows: [
+          ['Refer SME client','Submit basic company and invoice details','5 minutes','Open','Refer'],
+          ['Track referred deals','See review, confirmation and funding status','Live','Open','Track'],
+          ['Treasury allocation','Review eligible receivable pools','Optional','Open','Review']
+        ]
+      }
+    };
+
+    function toggleMenu(){
+      document.getElementById('portalActions').classList.toggle('open');
+    }
+
+    function scrollToSection(id){
+      const el = document.getElementById(id);
+      if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+      document.getElementById('portalActions').classList.remove('open');
+    }
+
+    function openPortal(type){
+      const data = portalData[type];
+      if(!data) return;
+      document.getElementById('website').style.display='none';
+      document.getElementById('portal').style.display='block';
+      document.getElementById('portalTitle').textContent=data.title;
+      document.getElementById('portalKicker').textContent=data.kicker;
+      document.getElementById('portalHeading').textContent=data.heading;
+      document.getElementById('portalIntro').textContent=data.intro;
+      document.getElementById('portalMetrics').innerHTML=data.metrics.map(item=>`<div class="metric"><span>${item[0]}</span><strong>${item[1]}</strong></div>`).join('');
+      document.getElementById('portalRows').innerHTML=data.rows.map(row=>`
+        <div class="deal-row">
+          <div><strong>${row[0]}</strong><small>${row[1]}</small></div>
+          <div><strong>${row[2]}</strong><small>Term</small></div>
+          <div><strong>${row[3]}</strong><small>Status</small></div>
+          <button class="btn btn-light" onclick="showToast('Demo action only. This would open the next workflow in the production platform.')">${row[4]}</button>
+        </div>
+      `).join('');
+      window.scrollTo({top:0, behavior:'instant'});
+    }
+
+    function returnHome(){
+      document.getElementById('portal').style.display='none';
+      document.getElementById('website').style.display='block';
+      window.scrollTo({top:0, behavior:'instant'});
+      return false;
+    }
+
+    function showToast(message){
+      const toast=document.getElementById('toast');
+      toast.textContent=message;
+      toast.classList.add('show');
+      clearTimeout(window.toastTimer);
+      window.toastTimer=setTimeout(()=>toast.classList.remove('show'),3200);
+    }
+  </script>
+</body>
+</html>
