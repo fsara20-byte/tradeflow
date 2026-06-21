@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>TradeFlow — Institutional Tokenised Trade Receivables Marketplace</title>
+<meta name="description" content="TradeFlow is an ADGM licensed / FSRA regulated marketplace for tokenised trade receivables, built for banks, investment funds, family offices and qualified investors." />
+<meta name="theme-color" content="#0B1220" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700;800;900&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0B1220;--navy:#111827;--charcoal:#1F2937;--slate:#344054;--muted:#667085;--light:#F7F8FA;
+  --paper:#FFFFFF;--line:#E5E7EB;--line-dark:#CBD5E1;--gold:#9A6A22;--gold-soft:#F6F0E7;
+  --blue:#19355D;--blue-soft:#EEF3F9;--green:#14532D;--green-soft:#ECFDF3;--amber:#8A4B0F;--amber-soft:#FFF7E6;
+  --red:#7F1D1D;--red-soft:#FEF2F2;--shadow:0 18px 45px rgba(15,23,42,.08);--radius:16px;
+}
+*{box-sizing:border-box;margin:0;padding:0} html{scroll-behavior:smooth} body{font-family:'Inter',system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;background:#fff;color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased} a{text-decoration:none;color:inherit} button,input,select{font:inherit} button{cursor:pointer}
+.container{width:min(1180px,calc(100% - 44px));margin:0 auto}.serif{font-family:'Instrument Serif',Georgia,serif}.num{font-family:'Inter',system-ui,sans-serif;font-variant-numeric:tabular-nums}
+.site-header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.97);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}.nav{height:74px;display:flex;align-items:center;justify-content:space-between;gap:24px}.brand{font-family:'Instrument Serif',Georgia,serif;font-size:31px;letter-spacing:-.03em;color:var(--ink)}.brand span{color:var(--gold)}.main-nav{display:flex;align-items:center;gap:24px}.main-nav a,.main-nav button{border:0;background:transparent;color:var(--muted);font-size:13px;font-weight:700}.main-nav a:hover,.main-nav button:hover{color:var(--ink)}.portal-actions{display:flex;gap:8px;align-items:center}.pill-btn{border:1px solid var(--line-dark);background:#fff;color:var(--ink);border-radius:999px;padding:9px 13px;font-size:12px;font-weight:800}.pill-btn.dark{background:var(--ink);border-color:var(--ink);color:#fff}.pill-btn:hover,.btn:hover{transform:translateY(-1px);box-shadow:0 10px 22px rgba(15,23,42,.08)}
+.btn{border:0;border-radius:10px;padding:12px 17px;font-size:14px;font-weight:850;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:.15s}.btn.primary{background:var(--ink);color:#fff}.btn.gold{background:var(--gold);color:#fff}.btn.light{background:#fff;color:var(--ink);border:1px solid var(--line-dark)}.btn.ghost{background:transparent;border:1px solid var(--line-dark);color:var(--slate)}.btn.block{width:100%}.btn.small{padding:8px 11px;font-size:12px}.section{padding:76px 0;border-bottom:1px solid var(--line)}.section.compact{padding:52px 0}.section.light{background:var(--light)}.eyebrow{font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--gold);font-weight:900;margin-bottom:9px}h1,h2,.portal-title{font-family:'IBM Plex Sans','Inter',system-ui,sans-serif;letter-spacing:-.04em;color:var(--ink)}h1{font-size:72px;line-height:.98;margin-bottom:24px}h2{font-size:48px;line-height:1.05}.lead{font-size:18px;color:var(--slate);max-width:710px;line-height:1.75}.section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:28px;margin-bottom:32px}.section-copy{font-size:15px;color:var(--muted);max-width:650px;line-height:1.75}.hero{padding:86px 0 56px;background:#fff;border-bottom:1px solid var(--line)}.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}.kicker{display:inline-flex;border:1px solid var(--line-dark);background:#fff;color:var(--gold);border-radius:999px;padding:7px 12px;font-size:12px;font-weight:900;letter-spacing:.07em;text-transform:uppercase;margin-bottom:22px}.cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}.trust-line{font-size:12px;color:var(--muted);margin-top:18px}.hero-panel{background:#fff;border:1px solid var(--line-dark);border-radius:22px;padding:28px;box-shadow:var(--shadow)}.panel-top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;border-bottom:1px solid var(--line);padding-bottom:18px;margin-bottom:18px}.panel-label{font-size:11px;text-transform:uppercase;letter-spacing:.08em;font-weight:900;color:var(--muted)}.token-id{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;color:var(--gold);font-weight:800}.metric-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.metric{background:var(--light);border:1px solid var(--line);border-radius:14px;padding:15px;min-height:104px}.metric-label{font-size:11px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px}.metric-value{font-family:'Inter',system-ui,sans-serif;font-size:30px;line-height:1.1;font-weight:850;color:var(--ink);font-variant-numeric:tabular-nums}.metric-note{font-size:12px;color:var(--muted);margin-top:4px}.stat-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:#fff}.stat-strip .metric{border:0;border-radius:0;border-right:1px solid var(--line);background:#fff}.stat-strip .metric:last-child{border-right:0}.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}.card,.deal,.table-wrap{background:#fff;border:1px solid var(--line);border-radius:var(--radius);box-shadow:0 1px 0 rgba(15,23,42,.02)}.card{padding:22px}.card h3,.deal h3{font-size:18px;color:var(--ink);margin-bottom:8px}.card p,.deal p{font-size:14px;color:var(--muted);line-height:1.7}.numbered{width:32px;height:32px;border-radius:50%;background:var(--ink);color:#fff;font-size:13px;font-weight:900;display:flex;align-items:center;justify-content:center;margin-bottom:14px}.badge{display:inline-flex;align-items:center;gap:6px;padding:5px 9px;border-radius:999px;font-size:11px;font-weight:900;border:1px solid transparent}.badge.green{background:var(--green-soft);color:var(--green);border-color:#BFE4CD}.badge.blue{background:var(--blue-soft);color:var(--blue);border-color:#C8D6E9}.badge.amber{background:var(--amber-soft);color:var(--amber);border-color:#F2D095}.badge.dark{background:var(--ink);color:#fff;border-color:var(--ink)}.badge.red{background:var(--red-soft);color:var(--red);border-color:#FECACA}.deal{padding:20px;transition:.15s}.deal:hover{transform:translateY(-2px);box-shadow:var(--shadow)}.deal-top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:14px}.deal-sector{font-size:11px;font-weight:900;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}.deal-buyer{font-size:13px;color:var(--muted);margin-bottom:14px}.deal-metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:15px 0}.deal-metric-label{font-size:10px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.05em}.deal-metric-value{font-family:'Inter',system-ui,sans-serif;font-size:17px;font-weight:850;color:var(--ink);font-variant-numeric:tabular-nums}.deal-metric-value.yield{color:var(--green)}.score-box{background:var(--light);border:1px solid var(--line);border-radius:14px;padding:12px;margin-bottom:14px}.score-row{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:8px}.score-title{font-size:12px;font-weight:900;color:var(--ink)}.score-sub{font-size:12px;color:var(--muted)}.progress{height:8px;background:#E5E7EB;border-radius:99px;overflow:hidden}.progress span{display:block;height:100%;border-radius:99px;background:var(--gold)}.table-wrap{overflow-x:auto}.table-title{display:flex;justify-content:space-between;gap:14px;align-items:center;padding:18px 20px;border-bottom:1px solid var(--line)}table{width:100%;border-collapse:collapse;min-width:780px}th{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);text-align:left;padding:13px 14px;border-bottom:1px solid var(--line);background:#FAFAFA}td{font-size:14px;color:var(--ink);padding:14px;border-bottom:1px solid var(--line);vertical-align:top}tr:last-child td{border-bottom:0}.right{text-align:right}.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}.highlight{color:var(--green);font-weight:850}.portal{display:none;min-height:calc(100vh - 74px);background:#fff}.portal.active{display:block}.portal-shell{display:grid;grid-template-columns:260px 1fr;min-height:calc(100vh - 74px)}.sidebar{background:var(--ink);color:#fff;padding:24px;border-right:1px solid rgba(255,255,255,.08)}.sidebar .brand{color:#fff;margin-bottom:24px}.sidebar .brand span{color:#D6B27C}.side-btn{display:block;width:100%;text-align:left;border:1px solid transparent;background:transparent;color:#CBD5E1;border-radius:10px;padding:11px 12px;margin-bottom:6px;font-size:13px;font-weight:800}.side-btn.active,.side-btn:hover{background:rgba(255,255,255,.08);color:#fff;border-color:rgba(255,255,255,.08)}.portal-main{padding:28px;background:#fff}.portal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}.portal-title{font-size:36px}.app-view{display:none}.app-view.active{display:block}.orderbook{display:grid;grid-template-columns:1fr 1fr;gap:18px}.order-card{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#fff}.order-card h3{padding:16px 18px;border-bottom:1px solid var(--line);font-size:15px}.buy h3{color:var(--green)}.sell h3{color:var(--red)}.form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.field label{display:block;font-size:12px;font-weight:850;color:var(--slate);margin-bottom:6px}.field input,.field select{width:100%;border:1px solid var(--line-dark);border-radius:10px;background:#fff;padding:12px;color:var(--ink);font-size:14px}.note{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px;color:var(--muted);font-size:14px;line-height:1.7}.modal{position:fixed;inset:0;background:rgba(11,18,32,.58);z-index:100;display:none;align-items:center;justify-content:center;padding:22px}.modal.active{display:flex}.modal-card{background:#fff;border-radius:20px;width:min(920px,100%);max-height:90vh;overflow:auto;box-shadow:0 24px 80px rgba(0,0,0,.22)}.modal-head{display:flex;justify-content:space-between;align-items:center;padding:22px 24px;border-bottom:1px solid var(--line)}.modal-head h3{font-size:24px}.modal-body{padding:24px}.close{border:0;background:#fff;color:var(--muted);font-size:24px}.footer{padding:38px 0;background:var(--ink);color:#CBD5E1}.footer-grid{display:flex;justify-content:space-between;gap:20px}.disclaimer{font-size:12px;line-height:1.7;max-width:780px;color:#AAB4C1}.toast{position:fixed;right:22px;bottom:22px;background:var(--ink);color:#fff;padding:12px 16px;border-radius:12px;box-shadow:0 12px 35px rgba(17,24,39,.18);font-size:13px;font-weight:800;display:none;z-index:200}
+@media(max-width:980px){.hero-grid,.grid-2,.grid-3,.grid-4,.portal-shell,.orderbook{grid-template-columns:1fr}h1{font-size:52px}h2{font-size:40px}.main-nav{display:none}.section-head{display:block}.section-copy{margin-top:12px}.sidebar{display:none}.portal-main{padding:20px}.stat-strip{grid-template-columns:repeat(2,1fr)}.stat-strip .metric{border-bottom:1px solid var(--line)}}
+@media(max-width:640px){.container{width:min(100% - 28px,1180px)}.nav{height:auto;padding:14px 0;align-items:flex-start}.portal-actions{flex-wrap:wrap;justify-content:flex-end}h1{font-size:42px}.lead{font-size:16px}.metric-grid,.deal-metrics,.form-grid{grid-template-columns:repeat(2,1fr)}.stat-strip{grid-template-columns:1fr}.footer-grid{display:block}.section{padding:52px 0}}
+
+.institutional-footer{background:var(--ink);color:#CBD5E1;padding:54px 0 24px}
+.footer-columns{display:grid;grid-template-columns:1.35fr 1fr 1fr 1.1fr;gap:54px;align-items:start}
+.footer h4{font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:#fff;margin-bottom:16px}
+.footer a,.footer p{display:block;font-size:14px;color:#AAB4C1;line-height:1.6;margin-bottom:9px}
+.footer a:hover{color:#fff}
+.footer-brand-col p{max-width:360px}
+.footer-badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+.footer-badges span{border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:6px 10px;font-size:11px;font-weight:800;color:#fff}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.12);margin-top:34px;padding-top:18px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:12px;color:#AAB4C1}
+.invest-ticket{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:0 1px 0 rgba(15,23,42,.02)}
+.ticket-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+.ticket-row{display:flex;justify-content:space-between;gap:14px;border-bottom:1px solid var(--line);padding:10px 0;font-size:13px}
+.ticket-row:last-child{border-bottom:0}
+.ticket-row span:first-child{color:var(--muted)}
+.input-with-prefix{display:flex;border:1px solid var(--line-dark);border-radius:10px;overflow:hidden;background:#fff}
+.input-with-prefix span{padding:12px;background:#F8FAFC;border-right:1px solid var(--line);font-size:13px;font-weight:800;color:var(--muted)}
+.input-with-prefix input{border:0;flex:1;min-width:0}
+.portfolio-hero{background:linear-gradient(180deg,#FFFFFF,#F8FAFC);border:1px solid var(--line);border-radius:20px;padding:22px;margin-bottom:20px}
+.portfolio-hero-top{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;margin-bottom:18px}
+.allocation-bar{display:flex;height:12px;border-radius:999px;overflow:hidden;background:#E5E7EB;margin-top:12px}
+.alloc-a{background:#14532D}.alloc-b{background:#19355D}.alloc-c{background:#9A6A22}
+@media(max-width:980px){.footer-columns,.ticket-grid{grid-template-columns:1fr}.portfolio-hero-top{display:block}}
+
+
+.process-flow{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-top:22px}
+.process-step{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;min-height:118px}
+.process-step strong{display:block;font-size:14px;margin-bottom:6px;color:var(--ink)}
+.process-step span{display:block;font-size:12px;color:var(--muted);line-height:1.5}
+.factor-list{display:grid;gap:10px}
+.factor-row{display:grid;grid-template-columns:170px 1fr 46px;gap:12px;align-items:center;font-size:13px}
+.factor-row span:first-child{color:var(--muted)}
+.factor-bar{height:8px;background:#E5E7EB;border-radius:999px;overflow:hidden}
+.factor-bar i{display:block;height:100%;background:var(--gold);border-radius:999px}
+.deal-detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}
+.deal-detail-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px;min-width:0}
+.deal-detail-card h3{font-size:17px;margin-bottom:12px}
+.compact-table{width:100%;min-width:0!important}
+.compact-table td{font-size:13px;padding:10px 0;border-bottom:1px solid var(--line)}
+.compact-table td:last-child{text-align:right;font-weight:700}
+.modal-card{width:min(1040px,calc(100vw - 40px))!important}
+.modal-body{overflow-x:hidden}
+.bank-role-tabs{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:20px}
+.role-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px}
+.role-card h3{font-size:18px;margin-bottom:8px}
+.role-card p{color:var(--muted);font-size:14px;line-height:1.6}
+@media(max-width:980px){.process-flow{grid-template-columns:1fr 1fr}.deal-detail-grid,.bank-role-tabs{grid-template-columns:1fr}.factor-row{grid-template-columns:1fr}.modal-card{width:calc(100vw - 24px)!important}}
+@media(max-width:640px){.process-flow{grid-template-columns:1fr}}
+
+
+/* Targeted UX fixes */
+html,body{max-width:100%;overflow-x:hidden}
+.modal{overflow:hidden}
+.modal-card{width:min(980px,calc(100vw - 40px))!important;max-width:980px}
+.modal-body{overflow-x:hidden!important}
+.modal-body .metric-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+.modal-body .score-box{overflow:hidden}
+.modal-body .factor-list{gap:12px}
+.modal-body .factor-row{grid-template-columns:190px minmax(0,1fr) 48px;max-width:100%;overflow:hidden}
+.modal-body .factor-bar{width:100%;min-width:0}
+.deal-detail-grid{grid-template-columns:repeat(2,minmax(0,1fr));max-width:100%;overflow:hidden}
+.deal-detail-card{min-width:0;overflow:hidden}
+.compact-table{min-width:0!important;width:100%;table-layout:fixed}
+.compact-table td{word-break:normal;overflow-wrap:anywhere}
+.performance-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-bottom:20px}
+.performance-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px}
+.performance-card .metric-value{font-size:30px}
+.performance-section{margin-top:20px}
+.kpi-table{min-width:0!important;width:100%;table-layout:auto}
+.kpi-table td,.kpi-table th{white-space:normal}
+@media(max-width:980px){
+  .modal-card{width:calc(100vw - 24px)!important}
+  .modal-body .metric-grid,.performance-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .modal-body .factor-row{grid-template-columns:1fr;gap:6px}
+  .deal-detail-grid{grid-template-columns:1fr}
+}
+@media(max-width:640px){
+  .modal-body .metric-grid,.performance-grid{grid-template-columns:1fr}
+}
+
+
+/* Final layout fixes */
+.holdings-list{display:grid;gap:12px;padding:18px}
+.holding-item{display:grid;grid-template-columns:90px 1fr 70px 90px 110px;gap:12px;align-items:center;border:1px solid var(--line);border-radius:14px;padding:14px;background:#fff}
+.holding-label{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:900;margin-bottom:3px}
+.holding-val{font-size:13px;color:var(--ink);font-weight:800}
+.modal-content-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:18px;align-items:start}
+.deal-side-panel{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px;min-width:0}
+.buyer-list{display:grid;gap:8px;margin-top:12px}
+.buyer-row{display:grid;grid-template-columns:1.2fr 90px 75px 95px;gap:10px;align-items:center;border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:#fff}
+.buyer-name{font-size:13px;font-weight:850}.buyer-meta{font-size:11px;color:var(--muted);margin-top:2px}
+@media(max-width:980px){
+  .holding-item{grid-template-columns:1fr 1fr}
+  .modal-content-grid{grid-template-columns:1fr}
+  .buyer-row{grid-template-columns:1fr 70px}
+}
+
+
+/* Final modal + SME buyer fixes */
+.modal-card{width:min(1040px,calc(100vw - 48px))!important;max-width:1040px}
+.modal-body{overflow-x:hidden!important}
+.modal-content-grid{display:grid!important;grid-template-columns:1fr 1fr!important;gap:18px!important;align-items:stretch!important}
+.deal-side-panel{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px;min-width:0}
+.factor-list{display:grid;gap:12px}
+.factor-row{display:grid;grid-template-columns:170px minmax(0,1fr) 44px;gap:12px;align-items:center;font-size:13px}
+.factor-row span:first-child{color:var(--muted)}
+.factor-bar{width:100%;height:8px;background:#E5E7EB;border-radius:999px;overflow:hidden}
+.factor-bar i{display:block;height:100%;background:var(--gold);border-radius:999px}
+.deal-detail-grid{display:grid!important;grid-template-columns:1fr 1fr!important;gap:18px!important;margin-top:18px!important}
+.deal-detail-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px;min-width:0;overflow:hidden}
+.compact-table{width:100%!important;min-width:0!important;table-layout:fixed!important}
+.compact-table td{font-size:13px;padding:10px 0;border-bottom:1px solid var(--line);vertical-align:top;overflow-wrap:anywhere}
+.compact-table td:last-child{text-align:right;font-weight:800}
+.buyer-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:12px}
+.buyer-row{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;border:1px solid var(--line);border-radius:12px;padding:12px;background:#fff;min-width:0}
+.buyer-row > span:nth-of-type(2),.buyer-row > span:nth-of-type(3){font-size:12px;color:var(--muted)}
+.buyer-name{font-size:13px;font-weight:850}.buyer-meta{font-size:11px;color:var(--muted);margin-top:2px}
+@media(max-width:980px){
+  .modal-card{width:calc(100vw - 24px)!important}
+  .modal-content-grid,.deal-detail-grid{grid-template-columns:1fr!important}
+  .buyer-list{grid-template-columns:1fr 1fr}
+  .factor-row{grid-template-columns:1fr;gap:6px}
+}
+@media(max-width:640px){.buyer-list{grid-template-columns:1fr}}
+
+
+/* Fixed deal modal: no dead whitespace */
+.modal-card{width:min(1040px,calc(100vw - 48px))!important;max-width:1040px}
+.modal-body{overflow-x:hidden!important}
+.modal-body .metric-grid{grid-template-columns:repeat(4,minmax(0,1fr))!important}
+.modal-balanced{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}
+.modal-panel{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px;min-width:0}
+.modal-panel h3{font-size:18px;margin-bottom:12px}
+.modal-panel p{font-size:14px;color:var(--muted);line-height:1.65}
+.factor-list{display:grid;gap:12px}
+.factor-row{display:grid;grid-template-columns:170px minmax(0,1fr) 44px;gap:12px;align-items:center;font-size:13px}
+.factor-row span:first-child{color:var(--muted)}
+.factor-bar{width:100%;height:8px;background:#E5E7EB;border-radius:999px;overflow:hidden}
+.factor-bar i{display:block;height:100%;background:var(--gold);border-radius:999px}
+.compact-table{width:100%!important;min-width:0!important;table-layout:fixed!important}
+.compact-table td{font-size:13px;padding:10px 0;border-bottom:1px solid var(--line);vertical-align:top;overflow-wrap:anywhere}
+.compact-table td:last-child{text-align:right;font-weight:800}
+@media(max-width:980px){.modal-card{width:calc(100vw - 24px)!important}.modal-body .metric-grid,.modal-balanced{grid-template-columns:1fr!important}.factor-row{grid-template-columns:1fr;gap:6px}}
+
+
+/* SME application buyer dropdown fix */
+#smeApp .form-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;align-items:start}
+#smeApp select,#smeApp input{width:100%;min-width:0;max-width:100%}
+#smeApp .field{min-width:0}
+#smeApp .note{max-width:100%;overflow-wrap:anywhere}
+@media(max-width:800px){#smeApp .form-grid{grid-template-columns:1fr!important}}
+
+
+/* SME + Bank partner cleanup */
+#smeApp .sme-layout,
+#bankApp .bank-layout{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(320px,.9fr);gap:20px;align-items:start;margin-top:20px}
+#smeApp .form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+#smeApp .field{min-width:0}
+#smeApp input,#smeApp select{width:100%;min-width:0;max-width:100%}
+#smeApp .registered-buyers-card{max-height:none;overflow:visible}
+#smeApp .buyer-list{display:grid;grid-template-columns:1fr;gap:8px}
+#smeApp .buyer-row{display:grid;grid-template-columns:minmax(0,1fr) auto auto auto;gap:10px;align-items:center;border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:#fff}
+#smeApp .buyer-name{font-size:13px;font-weight:850;white-space:normal}
+#smeApp .buyer-meta{font-size:11px;color:var(--muted);margin-top:2px}
+#bankApp .bank-role-tabs{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:20px}
+#bankApp .role-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px;min-width:0}
+#bankApp .bank-section{margin-top:20px}
+#bankApp .table-wrap{max-width:100%;overflow-x:auto}
+@media(max-width:980px){
+  #smeApp .sme-layout,#bankApp .bank-layout,#bankApp .bank-role-tabs{grid-template-columns:1fr}
+  #smeApp .buyer-row{grid-template-columns:1fr auto}
+}
+@media(max-width:640px){#smeApp .form-grid{grid-template-columns:1fr}}
+
+
+/* SME dropdown-only buyer universe */
+#smeApp .sme-layout{display:block!important}
+#smeApp .form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+#smeApp select{max-width:100%;white-space:normal}
+#smeApp .field{min-width:0}
+@media(max-width:800px){#smeApp .form-grid{grid-template-columns:1fr}}
+
+
+/* Footer visible on homepage */
+.institutional-footer{background:var(--ink);color:#CBD5E1;padding:54px 0 24px;margin-top:0}
+.footer-columns{display:grid;grid-template-columns:1.35fr 1fr 1fr 1.1fr;gap:54px;align-items:start}
+.footer h4{font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:#fff;margin-bottom:16px}
+.footer a,.footer p{display:block;font-size:14px;color:#AAB4C1;line-height:1.6;margin-bottom:9px}
+.footer a:hover{color:#fff}
+.footer-brand-col p{max-width:360px}
+.footer-badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+.footer-badges span{border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:6px 10px;font-size:11px;font-weight:800;color:#fff}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.12);margin-top:34px;padding-top:18px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:12px;color:#AAB4C1}
+@media(max-width:980px){.footer-columns{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){.footer-columns{grid-template-columns:1fr}}
+
+
+/* Marketplace / Secondary / Ownership final cleanup */
+.portal.active ~ .footer,
+#portal .footer,
+.portal .footer,
+body.portal-open #siteFooter{display:none!important}
+.market-deal-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.market-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px;min-width:0}
+.market-card h3{font-size:17px;margin:8px 0 6px}
+.market-card .deal-buyer{font-size:13px;color:var(--muted);line-height:1.55;margin-bottom:14px}
+.market-card .deal-metrics{grid-template-columns:repeat(4,minmax(0,1fr))}
+.secondary-layout{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:20px}
+.secondary-panel{background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.secondary-panel h3{font-size:18px;padding:18px 20px;border-bottom:1px solid var(--line)}
+.secondary-panel table{min-width:0!important}
+.secondary-note{background:#F8FAFC;border:1px solid var(--line);border-radius:16px;padding:16px;color:var(--muted);font-size:14px;line-height:1.65;margin-bottom:20px}
+.ownership-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:18px;align-items:start}
+.ownership-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px}
+.ownership-list{display:grid;gap:12px}
+.ownership-item{display:grid;grid-template-columns:90px 1fr 75px 90px 110px;gap:12px;align-items:center;border:1px solid var(--line);border-radius:14px;padding:14px;background:#fff}
+.ownership-label{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:900;margin-bottom:3px}
+.ownership-value{font-size:13px;color:var(--ink);font-weight:850}
+@media(max-width:1100px){.market-deal-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.ownership-grid,.secondary-layout{grid-template-columns:1fr}}
+@media(max-width:720px){.market-deal-grid{grid-template-columns:1fr}.ownership-item{grid-template-columns:1fr 1fr}}
+
+/* Sidebar height fix */
+.portal.active{min-height:100vh;background:#fff}
+.portal-shell{min-height:100vh!important;align-items:stretch}
+.sidebar{min-height:100vh!important;height:auto!important;align-self:stretch;position:sticky;top:0}
+.portal-main{min-height:100vh}
+@media(max-width:980px){.sidebar{position:relative;min-height:auto!important}}
+</style>
+</head>
+<body>
+<header class="site-header" id="siteHeader"><div class="container nav"><a class="brand" href="#" onclick="showMarketing();return false;">Trade<span>Flow</span></a><nav class="main-nav"><a href="#marketplace">Marketplace</a><a href="#tokenisation">Tokenisation</a><a href="#scoring">Credit Scoring</a><a href="#secondary">Secondary Market</a><button onclick="openPortal('analytics')">Platform Analytics</button></nav><div class="portal-actions"><button class="pill-btn" onclick="openPortal('investor')">Investor Access</button><button class="pill-btn" onclick="openPortal('sme')">SME Access</button><button class="pill-btn dark" onclick="openPortal('bank')">Bank Partner</button></div></div></header>
+<main id="marketing">
+<section class="hero"><div class="container hero-grid"><div><div class="kicker">ADGM Licensed / FSRA Regulated</div><h1>Tokenised receivables for institutional private credit.</h1><p class="lead">TradeFlow gives banks, investment funds, family offices and qualified investors access to verified trade receivables with AI credit grades, legal assignment, SPV controls and tokenised ownership records.</p><div class="cta-row"><button class="btn primary" onclick="openPortal('investor')">Enter investor marketplace</button><button class="btn light" onclick="document.getElementById('marketplace').scrollIntoView()">View featured deals</button></div><div class="trust-line">Investment access subject to KYC, suitability, risk disclosure and investor classification.</div></div><div class="hero-panel"><div class="panel-top"><div><div class="panel-label">Featured receivable token</div><h3 style="font-size:24px;margin-top:5px">Abu Dhabi Infrastructure Receivable</h3><p class="score-sub">Verified invoice assigned to TradeFlow SPV</p></div><div class="token-id">TF-2847</div></div><div class="metric-grid"><div class="metric"><div class="metric-label">Target net yield</div><div class="metric-value">5.8%</div><div class="metric-note">annualised</div></div><div class="metric"><div class="metric-label">AI credit grade</div><div class="metric-value">A</div><div class="metric-note">842 / 900</div></div><div class="metric"><div class="metric-label">Duration</div><div class="metric-value">90d</div><div class="metric-note">self-liquidating</div></div><div class="metric"><div class="metric-label">Funding</div><div class="metric-value">87%</div><div class="metric-note">AED 3.2M size</div></div></div></div></div></section>
+<section class="section compact"><div class="container"><div class="stat-strip"><div class="metric"><div class="metric-label">Tokenised volume</div><div class="metric-value">AED 42.3M</div><div class="metric-note">Illustrative platform AUF</div></div><div class="metric"><div class="metric-label">Average yield</div><div class="metric-value">8.4%</div><div class="metric-note">Net annualised</div></div><div class="metric"><div class="metric-label">Repayment rate</div><div class="metric-value">100%</div><div class="metric-note">Demo portfolio history</div></div><div class="metric"><div class="metric-label">Active investors</div><div class="metric-value">247</div><div class="metric-note">Qualified accounts</div></div></div></div></section>
+
+<section class="section" id="process"><div class="container">
+  <div class="section-head"><div><div class="eyebrow">Investment process</div><h2>From verified invoice to investor repayment.</h2></div>
+  <p class="section-copy">TradeFlow begins with institutional-grade underwriting and qualified investor access, with a long-term vision of expanding access to an asset class historically reserved for banks and large funds.</p></div>
+  <div class="process-flow">
+    <div class="process-step"><strong>Source</strong><span>SMEs, banks and corporate partners submit receivables from creditworthy buyers.</span></div>
+    <div class="process-step"><strong>Underwrite</strong><span>AI scoring and credit committee review buyer quality, documents and payment history.</span></div>
+    <div class="process-step"><strong>Tokenise</strong><span>The legally assigned receivable is recorded as fractional economic interests.</span></div>
+    <div class="process-step"><strong>Fund</strong><span>Eligible investors subscribe by ticket size, subject to KYC and suitability.</span></div>
+    <div class="process-step"><strong>Repay</strong><span>Buyer pays the SPV collection account and cash flows are distributed by ownership share.</span></div>
+    <div class="process-step"><strong>Trade</strong><span>Secondary transfers are optional and subject to eligibility, transfer restrictions and liquidity.</span></div>
+  </div>
+</div></section>
+<section class="section light" id="marketplace"><div class="container"><div class="section-head"><div><div class="eyebrow">Marketplace</div><h2>Credit-assessed cash flows, not unsecured SME lending.</h2></div><p class="section-copy">Each listed opportunity shows buyer type, AI grade, yield, tenor, funding progress, token ID and risk controls before subscription.</p></div><div class="deal-grid"><article class="deal"><div class="deal-top"><span class="deal-sector">Government-linked buyer</span><span class="badge green">Grade A · 842/900</span></div><h3>Abu Dhabi Infrastructure Receivable</h3><p class="deal-buyer">Token TF-2847 · Verified purchase order and delivery note</p><div class="deal-metrics"><div><div class="deal-metric-label">Yield</div><div class="deal-metric-value yield">5.8%</div></div><div><div class="deal-metric-label">Tenor</div><div class="deal-metric-value">90d</div></div><div><div class="deal-metric-label">Size</div><div class="deal-metric-value">3.2M</div></div><div><div class="deal-metric-label">Funded</div><div class="deal-metric-value">87%</div></div></div><div class="score-box"><div class="score-row"><span class="score-title">Funding progress</span><span class="score-sub">87%</span></div><div class="progress"><span style="width:87%"></span></div></div><button type="button" class="btn primary block" onclick="openDeal('A')">Open deal room</button></article><article class="deal"><div class="deal-top"><span class="deal-sector">Corporate buyer</span><span class="badge blue">Grade B · 731/900</span></div><h3>Emaar Construction Supply Chain</h3><p class="deal-buyer">Token TF-2831 · Bank referred receivable</p><div class="deal-metrics"><div><div class="deal-metric-label">Yield</div><div class="deal-metric-value yield">7.2%</div></div><div><div class="deal-metric-label">Tenor</div><div class="deal-metric-value">90d</div></div><div><div class="deal-metric-label">Size</div><div class="deal-metric-value">1.8M</div></div><div><div class="deal-metric-label">Funded</div><div class="deal-metric-value">62%</div></div></div><div class="score-box"><div class="score-row"><span class="score-title">Funding progress</span><span class="score-sub">62%</span></div><div class="progress"><span style="width:62%"></span></div></div><button type="button" class="btn primary block" onclick="openDeal('B')">Open deal room</button></article><article class="deal"><div class="deal-top"><span class="deal-sector">Private buyer</span><span class="badge amber">Grade C · 612/900</span></div><h3>Subcontractor Receivable</h3><p class="deal-buyer">Token TF-2798 · Enhanced due diligence and insurance required</p><div class="deal-metrics"><div><div class="deal-metric-label">Yield</div><div class="deal-metric-value yield">11.5%</div></div><div><div class="deal-metric-label">Tenor</div><div class="deal-metric-value">90d</div></div><div><div class="deal-metric-label">Size</div><div class="deal-metric-value">680K</div></div><div><div class="deal-metric-label">Funded</div><div class="deal-metric-value">28%</div></div></div><div class="score-box"><div class="score-row"><span class="score-title">Funding progress</span><span class="score-sub">28%</span></div><div class="progress"><span style="width:28%"></span></div></div><button type="button" class="btn primary block" onclick="openDeal('C')">Open deal room</button></article></div></div></section>
+<section class="section" id="tokenisation"><div class="container"><div class="section-head"><div><div class="eyebrow">Tokenised ownership</div><h2>The token records fractional economic ownership of a legally assigned receivable.</h2></div><p class="section-copy">The platform tokenises the economic interest in the receivable’s cash flow. The invoice is verified, assigned to an SPV, funded by investors, then repaid when the buyer pays the SPV collection account.</p></div><div class="grid-3"><div class="card"><div class="numbered">1</div><h3>Legal assignment</h3><p>Receivable transferred into a bankruptcy-remote SPV with notice and buyer confirmation.</p></div><div class="card"><div class="numbered">2</div><h3>Token registry</h3><p>Investor allocations are recorded as tokenised ownership units tied to the underlying receivable.</p></div><div class="card"><div class="numbered">3</div><h3>Cash-flow distribution</h3><p>At maturity, buyer repayment is distributed to token holders based on ownership percentage.</p></div></div></div></section>
+<section class="section light" id="scoring"><div class="container"><div class="section-head"><div><div class="eyebrow">Underwriting</div><h2>AI scoring with a credit committee logic investors can understand.</h2></div><p class="section-copy">TradeFlow grades every receivable using buyer quality, payment history, financial strength, invoice documentation, concentration, sector risk and monitoring data.</p></div><div class="table-wrap"><div class="table-title"><strong>Credit grade framework</strong><span class="badge dark">AI + credit assessment</span></div><table><thead><tr><th>Grade</th><th>Score</th><th>Typical buyer</th><th>Target net yield</th><th>Controls</th></tr></thead><tbody><tr><td><span class="badge green">Grade A</span></td><td>800–900</td><td>Government, quasi-government, investment-grade corporate</td><td>4.5–6.5%</td><td>Buyer confirmation, exposure cap, reserve allocation</td></tr><tr><td><span class="badge blue">Grade B</span></td><td>700–799</td><td>Large private or listed corporate buyer</td><td>6.5–9.0%</td><td>Enhanced monitoring, documentation controls</td></tr><tr><td><span class="badge amber">Grade C</span></td><td>600–699</td><td>Private buyer with shorter payment history</td><td>9.0–14.0%</td><td>Insurance, lower advance rate, higher reserve</td></tr></tbody></table></div>
+<div class="grid-2" style="margin-top:18px">
+  <div class="card"><h3>AI score weighting</h3><div class="factor-list">
+    <div class="factor-row"><span>Payment Behaviour</span><div class="factor-bar"><i style="width:35%"></i></div><strong>35%</strong></div>
+    <div class="factor-row"><span>Counterparty Quality</span><div class="factor-bar"><i style="width:25%"></i></div><strong>25%</strong></div>
+    <div class="factor-row"><span>Industry Risk</span><div class="factor-bar"><i style="width:15%"></i></div><strong>15%</strong></div>
+    <div class="factor-row"><span>Concentration Risk</span><div class="factor-bar"><i style="width:10%"></i></div><strong>10%</strong></div>
+    <div class="factor-row"><span>Documentation Quality</span><div class="factor-bar"><i style="width:15%"></i></div><strong>15%</strong></div>
+  </div></div>
+  <div class="card"><h3>Counterparty profile view</h3><table class="compact-table"><tbody>
+    <tr><td>Sector</td><td>Infrastructure / procurement</td></tr>
+    <tr><td>Country</td><td>UAE / GCC</td></tr>
+    <tr><td>Payment terms</td><td>45–120 days</td></tr>
+    <tr><td>Historic delay rate</td><td>Low to moderate</td></tr>
+    <tr><td>Default risk</td><td>Mapped by grade</td></tr>
+  </tbody></table></div>
+</div>
+</div></section>
+<section class="section" id="secondary"><div class="container"><div class="section-head"><div><div class="eyebrow">Secondary market</div><h2>Order book for existing invoice tokens.</h2></div><p class="section-copy">Secondary trading allows eligible investors to exit before maturity and allows approved buyers to purchase remaining yield exposure. Trading is subject to eligibility, transfer restrictions, liquidity availability, regulatory approvals and platform volume thresholds.</p></div><div class="orderbook"><div class="order-card buy"><h3>Bid book</h3><table><thead><tr><th>Token</th><th>Bid price</th><th>YTM</th><th class="right">Size</th></tr></thead><tbody><tr><td class="mono">TF-2831</td><td>99.21</td><td class="highlight">7.9%</td><td class="right">AED 120K</td></tr><tr><td class="mono">TF-2847</td><td>99.62</td><td class="highlight">5.9%</td><td class="right">AED 250K</td></tr><tr><td class="mono">TF-2801</td><td>98.74</td><td class="highlight">9.8%</td><td class="right">AED 80K</td></tr></tbody></table></div><div class="order-card sell"><h3>Ask book</h3><table><thead><tr><th>Token</th><th>Ask price</th><th>YTM</th><th class="right">Size</th></tr></thead><tbody><tr><td class="mono">TF-2831</td><td>99.44</td><td class="highlight">7.2%</td><td class="right">AED 50K</td></tr><tr><td class="mono">TF-2847</td><td>99.80</td><td class="highlight">5.4%</td><td class="right">AED 140K</td></tr><tr><td class="mono">TF-2798</td><td>97.95</td><td class="highlight">11.1%</td><td class="right">AED 45K</td></tr></tbody></table></div></div><div class="grid-2" style="margin-top:18px"><div class="card"><h3>Secondary trade ticket</h3><div class="form-grid"><div class="field"><label>Token</label><select><option>TF-2831 — Emaar Construction</option><option>TF-2847 — Abu Dhabi Infrastructure</option></select></div><div class="field"><label>Side</label><select><option>Buy</option><option>Sell</option></select></div><div class="field"><label>Limit price</label><input value="99.35"></div><div class="field"><label>Amount</label><input value="AED 50,000"></div></div><button class="btn primary" style="margin-top:14px" onclick="toast('Secondary order staged for review')">Stage order</button></div><div class="table-wrap"><div class="table-title"><strong>Recent secondary trades</strong><span class="badge blue">Year 3+ product</span></div><table><thead><tr><th>Token</th><th>Price</th><th>YTM</th><th class="right">Amount</th></tr></thead><tbody><tr><td class="mono">TF-2831</td><td>99.36</td><td>7.5%</td><td class="right">AED 75K</td></tr><tr><td class="mono">TF-2847</td><td>99.72</td><td>5.6%</td><td class="right">AED 110K</td></tr></tbody></table></div></div><div class="note" style="margin-top:18px"><strong>Controlled transfer environment:</strong> secondary trades remain subject to eligibility, transfer restrictions, liquidity availability and compliance approval. TradeFlow is built to support permissioned ledger infrastructure such as R3 Corda for institutional token records and settlement, without making the technology vendor the core product.</div></div></section>
+
+<footer class="footer institutional-footer" id="siteFooter">
+  <div class="container footer-columns">
+    <div class="footer-brand-col">
+      <div class="brand" style="color:#fff">Trade<span>Flow</span></div>
+      <p>Connecting institutional capital with verified trade receivables through tokenisation, legal assignment and data-driven credit assessment.</p>
+      <div class="footer-badges">
+        <span>ADGM Licensed</span>
+        <span>FSRA Regulated</span>
+      </div>
+    </div>
+    <div>
+      <h4>For investors</h4>
+      <a href="#marketplace">Live receivable deals</a>
+      <a href="#" onclick="openPortal('investor');return false;">Investor portal</a>
+      <a href="#" onclick="openPortal('analytics');return false;">Portfolio analytics</a>
+      <a href="#secondary">Secondary market</a>
+    </div>
+    <div>
+      <h4>Platform</h4>
+      <a href="#tokenisation">Tokenisation framework</a>
+      <a href="#scoring">Risk methodology</a>
+      <a href="#secondary">Invoice token trading</a>
+      <a href="#risk">Security & compliance</a>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <p><strong>Abu Dhabi</strong><br>ADGM, Abu Dhabi, UAE</p>
+      <p><strong>London</strong><br>Institutional partnerships</p>
+      <a href="mailto:enquiry@tradeflow.capital">enquiry@tradeflow.capital</a>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <span>© 2026 TradeFlow. All rights reserved.</span>
+    <span>Terms of Use · Privacy Policy · Compliance · ADGM Notice</span>
+  </div>
+</footer>
+
+</main>
+<section class="portal" id="portal"><div class="portal-shell"><aside class="sidebar"><div class="brand">Trade<span>Flow</span></div><button class="side-btn active" onclick="showApp('portfolioApp',this)">Investor portfolio</button><button class="side-btn" onclick="showApp('marketApp',this)">Deal marketplace</button><button class="side-btn" onclick="showApp('ownershipApp',this)">Token ownership</button><button class="side-btn" onclick="showApp('secondaryApp',this)">Secondary order book</button><button class="side-btn" onclick="showApp('analyticsApp',this)">Platform statistics</button><button class="side-btn" onclick="showApp('smeApp',this)">SME application</button><button class="side-btn" onclick="showApp('bankApp',this)">Bank partner</button><button class="side-btn" onclick="showMarketing()">Back to website</button></aside><div class="portal-main"><div class="portal-head"><div><div class="eyebrow">Internal access</div><div class="portal-title" id="portalTitle">Investor portfolio</div></div><button class="pill-btn" onclick="showMarketing()">Back to website</button></div><div class="app-view active" id="portfolioApp"><div class="grid-4"><div class="card"><div class="metric-label">Portfolio value</div><div class="metric-value">AED 412K</div><p>12 active token positions</p></div><div class="card"><div class="metric-label">Weighted yield</div><div class="metric-value">8.1%</div><p>Net annualised</p></div><div class="card"><div class="metric-label">Accrued yield</div><div class="metric-value">AED 8.7K</div><p>Current month</p></div><div class="card"><div class="metric-label">Avg. duration</div><div class="metric-value">62d</div><p>Remaining weighted tenor</p></div></div><div class="grid-2"><div class="card" style="padding:0;overflow:hidden">
+  <div class="table-title"><strong>Active holdings</strong><span class="badge dark">Real token ownership view</span></div>
+  <div class="holdings-list">
+    <div class="holding-item">
+      <div><div class="holding-label">Token</div><div class="holding-val mono">TF-2847</div></div>
+      <div><div class="holding-label">Receivable</div><div class="holding-val">Infrastructure receivable</div></div>
+      <div><div class="holding-label">Grade</div><span class="badge green">A</span></div>
+      <div><div class="holding-label">Ownership</div><div class="holding-val">3.13%</div></div>
+      <div><div class="holding-label">Position</div><div class="holding-val">AED 100K</div></div>
+    </div>
+    <div class="holding-item">
+      <div><div class="holding-label">Token</div><div class="holding-val mono">TF-2831</div></div>
+      <div><div class="holding-label">Receivable</div><div class="holding-val">GCC developer supply chain</div></div>
+      <div><div class="holding-label">Grade</div><span class="badge blue">B</span></div>
+      <div><div class="holding-label">Ownership</div><div class="holding-val">5.56%</div></div>
+      <div><div class="holding-label">Position</div><div class="holding-val">AED 100K</div></div>
+    </div>
+    <div class="holding-item">
+      <div><div class="holding-label">Token</div><div class="holding-val mono">TF-2801</div></div>
+      <div><div class="holding-label">Receivable</div><div class="holding-val">Healthcare procurement invoice</div></div>
+      <div><div class="holding-label">Grade</div><span class="badge blue">B+</span></div>
+      <div><div class="holding-label">Ownership</div><div class="holding-val">2.38%</div></div>
+      <div><div class="holding-label">Position</div><div class="holding-val">AED 50K</div></div>
+    </div>
+  </div>
+</div><div class="card"><h3>Portfolio allocation</h3><div class="score-box"><div class="score-row"><span class="score-title">Government / quasi-government</span><span class="score-sub">48%</span></div><div class="progress"><span style="width:48%"></span></div></div><div class="score-box"><div class="score-row"><span class="score-title">Corporate buyers</span><span class="score-sub">40%</span></div><div class="progress"><span style="width:40%"></span></div></div><div class="score-box"><div class="score-row"><span class="score-title">Insurance-linked receivables</span><span class="score-sub">12%</span></div><div class="progress"><span style="width:12%"></span></div></div></div></div></div><div class="app-view" id="marketApp">
+  <div class="section-head" style="margin-bottom:20px">
+    <div><div class="eyebrow">Deal marketplace</div><h2 style="font-size:30px">Live receivable opportunities</h2></div>
+    <p class="section-copy">Each deal includes buyer score, grade, yield, tenor, funding progress and risk controls before subscription.</p>
+  </div>
+  <div class="market-deal-grid">
+    <article class="market-card">
+  <div class="deal-top"><span class="deal-sector">TF-2847</span><span class="badge green">Grade A · 842/900</span></div>
+  <h3>UAE Government Infrastructure Buyer</h3>
+  <p class="deal-buyer">Government-linked infrastructure receivable</p>
+  <div class="deal-metrics">
+    <div><div class="deal-metric-label">Yield</div><div class="deal-metric-value yield">5.8%</div></div>
+    <div><div class="deal-metric-label">Tenor</div><div class="deal-metric-value">90d</div></div>
+    <div><div class="deal-metric-label">Size</div><div class="deal-metric-value">3.2M</div></div>
+    <div><div class="deal-metric-label">Funded</div><div class="deal-metric-value">87%</div></div>
+  </div>
+  <div class="progress" style="margin:12px 0"><span style="width:87%"></span></div>
+  <button type="button" class="btn primary block" onclick="openDeal('A')">Open deal room</button>
+</article><article class="market-card">
+  <div class="deal-top"><span class="deal-sector">TF-2831</span><span class="badge green">Grade A · 821/900</span></div>
+  <h3>GCC Listed Real Estate Developer</h3>
+  <p class="deal-buyer">Real estate supply-chain receivable</p>
+  <div class="deal-metrics">
+    <div><div class="deal-metric-label">Yield</div><div class="deal-metric-value yield">6.3%</div></div>
+    <div><div class="deal-metric-label">Tenor</div><div class="deal-metric-value">60d</div></div>
+    <div><div class="deal-metric-label">Size</div><div class="deal-metric-value">2.75M</div></div>
+    <div><div class="deal-metric-label">Funded</div><div class="deal-metric-value">64%</div></div>
+  </div>
+  <div class="progress" style="margin:12px 0"><span style="width:64%"></span></div>
+  <button type="button" class="btn primary block" onclick="openDeal('A')">Open deal room</button>
+</article><article class="market-card">
+  <div class="deal-top"><span class="deal-sector">TF-2819</span><span class="badge blue">Grade B · 756/900</span></div>
+  <h3>Regional Logistics Operator</h3>
+  <p class="deal-buyer">Transport and logistics invoice</p>
+  <div class="deal-metrics">
+    <div><div class="deal-metric-label">Yield</div><div class="deal-metric-value yield">7.4%</div></div>
+    <div><div class="deal-metric-label">Tenor</div><div class="deal-metric-value">45d</div></div>
+    <div><div class="deal-metric-label">Size</div><div class="deal-metric-value">1.85M</div></div>
+    <div><div class="deal-metric-label">Funded</div><div class="deal-metric-value">41%</div></div>
+  </div>
+  <div class="progress" style="margin:12px 0"><span style="width:41%"></span></div>
+  <button type="button" class="btn primary block" onclick="openDeal('B')">Open deal room</button>
+</article><article class="market-card">
+  <div class="deal-top"><span class="deal-sector">TF-2801</span><span class="badge blue">Grade B+ · 733/900</span></div>
+  <h3>Healthcare Procurement Entity</h3>
+  <p class="deal-buyer">Medical supply receivable</p>
+  <div class="deal-metrics">
+    <div><div class="deal-metric-label">Yield</div><div class="deal-metric-value yield">8.1%</div></div>
+    <div><div class="deal-metric-label">Tenor</div><div class="deal-metric-value">60d</div></div>
+    <div><div class="deal-metric-label">Size</div><div class="deal-metric-value">2.10M</div></div>
+    <div><div class="deal-metric-label">Funded</div><div class="deal-metric-value">35%</div></div>
+  </div>
+  <div class="progress" style="margin:12px 0"><span style="width:35%"></span></div>
+  <button type="button" class="btn primary block" onclick="openDeal('B')">Open deal room</button>
+</article><article class="market-card">
+  <div class="deal-top"><span class="deal-sector">TF-2798</span><span class="badge amber">Grade B- · 682/900</span></div>
+  <h3>Energy Services Contractor</h3>
+  <p class="deal-buyer">Energy services receivable with enhanced reserve</p>
+  <div class="deal-metrics">
+    <div><div class="deal-metric-label">Yield</div><div class="deal-metric-value yield">9.2%</div></div>
+    <div><div class="deal-metric-label">Tenor</div><div class="deal-metric-value">75d</div></div>
+    <div><div class="deal-metric-label">Size</div><div class="deal-metric-value">1.40M</div></div>
+    <div><div class="deal-metric-label">Funded</div><div class="deal-metric-value">28%</div></div>
+  </div>
+  <div class="progress" style="margin:12px 0"><span style="width:28%"></span></div>
+  <button type="button" class="btn primary block" onclick="openDeal('C')">Open deal room</button>
+</article><article class="market-card">
+  <div class="deal-top"><span class="deal-sector">TF-2862</span><span class="badge green">Grade A- · 815/900</span></div>
+  <h3>Airport Facilities Operator</h3>
+  <p class="deal-buyer">Facilities maintenance receivable</p>
+  <div class="deal-metrics">
+    <div><div class="deal-metric-label">Yield</div><div class="deal-metric-value yield">6.1%</div></div>
+    <div><div class="deal-metric-label">Tenor</div><div class="deal-metric-value">60d</div></div>
+    <div><div class="deal-metric-label">Size</div><div class="deal-metric-value">950K</div></div>
+    <div><div class="deal-metric-label">Funded</div><div class="deal-metric-value">52%</div></div>
+  </div>
+  <div class="progress" style="margin:12px 0"><span style="width:52%"></span></div>
+  <button type="button" class="btn primary block" onclick="openDeal('A')">Open deal room</button>
+</article><article class="market-card">
+  <div class="deal-top"><span class="deal-sector">TF-2868</span><span class="badge green">Grade A- · 798/900</span></div>
+  <h3>Telecom Procurement Buyer</h3>
+  <p class="deal-buyer">Telecom infrastructure services invoice</p>
+  <div class="deal-metrics">
+    <div><div class="deal-metric-label">Yield</div><div class="deal-metric-value yield">6.8%</div></div>
+    <div><div class="deal-metric-label">Tenor</div><div class="deal-metric-value">90d</div></div>
+    <div><div class="deal-metric-label">Size</div><div class="deal-metric-value">1.25M</div></div>
+    <div><div class="deal-metric-label">Funded</div><div class="deal-metric-value">46%</div></div>
+  </div>
+  <div class="progress" style="margin:12px 0"><span style="width:46%"></span></div>
+  <button type="button" class="btn primary block" onclick="openDeal('B')">Open deal room</button>
+</article><article class="market-card">
+  <div class="deal-top"><span class="deal-sector">TF-2871</span><span class="badge green">Grade A · 836/900</span></div>
+  <h3>Government Education Authority</h3>
+  <p class="deal-buyer">Education procurement receivable</p>
+  <div class="deal-metrics">
+    <div><div class="deal-metric-label">Yield</div><div class="deal-metric-value yield">5.6%</div></div>
+    <div><div class="deal-metric-label">Tenor</div><div class="deal-metric-value">90d</div></div>
+    <div><div class="deal-metric-label">Size</div><div class="deal-metric-value">1.90M</div></div>
+    <div><div class="deal-metric-label">Funded</div><div class="deal-metric-value">73%</div></div>
+  </div>
+  <div class="progress" style="margin:12px 0"><span style="width:73%"></span></div>
+  <button type="button" class="btn primary block" onclick="openDeal('A')">Open deal room</button>
+</article><article class="market-card">
+  <div class="deal-top"><span class="deal-sector">TF-2876</span><span class="badge blue">Grade B · 719/900</span></div>
+  <h3>Food Distribution Network</h3>
+  <p class="deal-buyer">FMCG distribution invoice</p>
+  <div class="deal-metrics">
+    <div><div class="deal-metric-label">Yield</div><div class="deal-metric-value yield">8.4%</div></div>
+    <div><div class="deal-metric-label">Tenor</div><div class="deal-metric-value">60d</div></div>
+    <div><div class="deal-metric-label">Size</div><div class="deal-metric-value">760K</div></div>
+    <div><div class="deal-metric-label">Funded</div><div class="deal-metric-value">22%</div></div>
+  </div>
+  <div class="progress" style="margin:12px 0"><span style="width:22%"></span></div>
+  <button type="button" class="btn primary block" onclick="openDeal('B')">Open deal room</button>
+</article>
+  </div>
+</div><div class="app-view" id="ownershipApp">
+  <div class="ownership-grid">
+    <div class="ownership-card">
+      <div class="flex-between" style="margin-bottom:14px"><h3>Token ownership register</h3><span class="badge dark">Investor view</span></div>
+      <div class="ownership-list">
+        <div class="ownership-item"><div><div class="ownership-label">Token</div><div class="ownership-value mono">TF-2847</div></div><div><div class="ownership-label">Receivable</div><div class="ownership-value">UAE infrastructure receivable</div></div><div><div class="ownership-label">Grade</div><span class="badge green">A</span></div><div><div class="ownership-label">Ownership</div><div class="ownership-value">3.13%</div></div><div><div class="ownership-label">Position</div><div class="ownership-value">AED 100K</div></div></div>
+        <div class="ownership-item"><div><div class="ownership-label">Token</div><div class="ownership-value mono">TF-2831</div></div><div><div class="ownership-label">Receivable</div><div class="ownership-value">GCC developer supply chain</div></div><div><div class="ownership-label">Grade</div><span class="badge green">A</span></div><div><div class="ownership-label">Ownership</div><div class="ownership-value">3.64%</div></div><div><div class="ownership-label">Position</div><div class="ownership-value">AED 100K</div></div></div>
+        <div class="ownership-item"><div><div class="ownership-label">Token</div><div class="ownership-value mono">TF-2801</div></div><div><div class="ownership-label">Receivable</div><div class="ownership-value">Healthcare procurement invoice</div></div><div><div class="ownership-label">Grade</div><span class="badge blue">B+</span></div><div><div class="ownership-label">Ownership</div><div class="ownership-value">2.38%</div></div><div><div class="ownership-label">Position</div><div class="ownership-value">AED 50K</div></div></div>
+        <div class="ownership-item"><div><div class="ownership-label">Token</div><div class="ownership-value mono">TF-2819</div></div><div><div class="ownership-label">Receivable</div><div class="ownership-value">Regional logistics invoice</div></div><div><div class="ownership-label">Grade</div><span class="badge blue">B</span></div><div><div class="ownership-label">Ownership</div><div class="ownership-value">1.62%</div></div><div><div class="ownership-label">Position</div><div class="ownership-value">AED 30K</div></div></div>
+      </div>
+    </div>
+    <div class="ownership-card">
+      <h3>Ownership controls</h3>
+      <table class="compact-table"><tbody>
+        <tr><td>Register type</td><td>Permissioned token record</td></tr>
+        <tr><td>Transfer status</td><td>Restricted / eligible investors only</td></tr>
+        <tr><td>Settlement account</td><td>SPV collection account</td></tr>
+        <tr><td>Secondary eligibility</td><td>After lock-up and compliance approval</td></tr>
+        <tr><td>Audit trail</td><td>Allocation, transfer and repayment history</td></tr>
+      </tbody></table>
+      <div class="note" style="margin-top:16px">Token ownership represents economic exposure to the assigned receivable cash flow. It does not represent equity in the SME or buyer.</div>
+    </div>
+  </div>
+</div><div class="app-view" id="secondaryApp">
+  <div class="secondary-note"><strong>Controlled secondary market:</strong> trading is available only to eligible investors and remains subject to transfer restrictions, liquidity availability, compliance approval and platform rules. Liquidity is not guaranteed.</div>
+  <div class="secondary-layout">
+    <div class="secondary-panel">
+      <h3>Bid book</h3>
+      <table class="kpi-table"><thead><tr><th>Token</th><th>Bid</th><th>YTM</th><th>Size</th></tr></thead><tbody>
+        <tr><td class="mono">TF-2831</td><td>99.21</td><td class="highlight">7.9%</td><td>AED 45K</td></tr>
+        <tr><td class="mono">TF-2847</td><td>99.42</td><td class="highlight">6.2%</td><td>AED 60K</td></tr>
+        <tr><td class="mono">TF-2819</td><td>98.86</td><td class="highlight">8.5%</td><td>AED 35K</td></tr>
+        <tr><td class="mono">TF-2801</td><td>98.74</td><td class="highlight">8.9%</td><td>AED 25K</td></tr>
+        <tr><td class="mono">TF-2798</td><td>97.90</td><td class="highlight">12.1%</td><td>AED 20K</td></tr>
+      </tbody></table>
+    </div>
+    <div class="secondary-panel">
+      <h3>Ask book</h3>
+      <table class="kpi-table"><thead><tr><th>Token</th><th>Ask</th><th>YTM</th><th>Size</th></tr></thead><tbody>
+        <tr><td class="mono">TF-2831</td><td>99.48</td><td class="highlight">7.1%</td><td>AED 30K</td></tr>
+        <tr><td class="mono">TF-2847</td><td>99.66</td><td class="highlight">5.6%</td><td>AED 40K</td></tr>
+        <tr><td class="mono">TF-2819</td><td>99.05</td><td class="highlight">7.8%</td><td>AED 50K</td></tr>
+        <tr><td class="mono">TF-2801</td><td>99.02</td><td class="highlight">8.1%</td><td>AED 15K</td></tr>
+        <tr><td class="mono">TF-2798</td><td>98.30</td><td class="highlight">10.9%</td><td>AED 10K</td></tr>
+      </tbody></table>
+    </div>
+  </div>
+  <div class="grid-2">
+    <div class="table-wrap">
+      <div class="table-title"><strong>Recent secondary trades</strong><span class="badge blue">Executed</span></div>
+      <table class="kpi-table"><thead><tr><th>Token</th><th>Price</th><th>Size</th><th>Buyer type</th><th>Status</th></tr></thead><tbody>
+        <tr><td class="mono">TF-2847</td><td>99.58</td><td>AED 25K</td><td>Qualified investor</td><td>Settled</td></tr>
+        <tr><td class="mono">TF-2831</td><td>99.35</td><td>AED 40K</td><td>Family office</td><td>Settled</td></tr>
+        <tr><td class="mono">TF-2819</td><td>98.96</td><td>AED 20K</td><td>Private bank client</td><td>Pending transfer</td></tr>
+      </tbody></table>
+    </div>
+    <div class="card">
+      <h3>Secondary order ticket</h3>
+      <div class="form-grid">
+        <div class="field"><label>Token</label><select><option>TF-2847</option><option>TF-2831</option><option>TF-2819</option><option>TF-2801</option><option>TF-2798</option></select></div>
+        <div class="field"><label>Side</label><select><option>Buy</option><option>Sell</option></select></div>
+        <div class="field"><label>Limit price</label><input value="99.25"></div>
+        <div class="field"><label>Size</label><input value="AED 25,000"></div>
+      </div>
+      <div class="note" style="margin-top:16px">Orders are staged for compliance review. Execution depends on eligibility, available liquidity and transfer approval.</div>
+      <button class="btn primary" style="margin-top:16px" onclick="toast('Secondary order staged for review')">Stage order</button>
+    </div>
+  </div>
+</div><div class="app-view" id="analyticsApp">
+  <div class="performance-grid">
+    <div class="performance-card"><div class="metric-label">Assets under finance</div><div class="metric-value">AED 42.3M</div><p>Active receivables financed</p></div>
+    <div class="performance-card"><div class="metric-label">Tokenised volume</div><div class="metric-value">AED 118M</div><p>Cumulative tokenised receivables</p></div>
+    <div class="performance-card"><div class="metric-label">Weighted net yield</div><div class="metric-value">8.1%</div><p>Across active portfolio</p></div>
+    <div class="performance-card"><div class="metric-label">Repayment rate</div><div class="metric-value">99.2%</div><p>Historical on-time repayment</p></div>
+  </div>
+  <div class="grid-2 performance-section">
+    <div class="table-wrap">
+      <div class="table-title"><strong>Performance by credit grade</strong><span class="badge dark">Portfolio statistics</span></div>
+      <table class="kpi-table"><thead><tr><th>Grade</th><th>AUF</th><th>Avg yield</th><th>Avg tenor</th><th>Completed</th><th>Delay rate</th></tr></thead><tbody>
+        <tr><td><span class="badge green">A</span></td><td>AED 18.4M</td><td>5.6%</td><td>63d</td><td>41</td><td>0.4%</td></tr>
+        <tr><td><span class="badge blue">B</span></td><td>AED 19.1M</td><td>7.6%</td><td>78d</td><td>33</td><td>1.1%</td></tr>
+        <tr><td><span class="badge amber">C</span></td><td>AED 4.8M</td><td>11.2%</td><td>90d</td><td>8</td><td>2.8%</td></tr>
+      </tbody></table>
+    </div>
+    <div class="table-wrap">
+      <div class="table-title"><strong>Portfolio risk controls</strong><span class="badge green">Within limits</span></div>
+      <table class="kpi-table"><tbody>
+        <tr><td>Largest buyer exposure</td><td class="right"><strong>18%</strong></td></tr>
+        <tr><td>Top five buyer concentration</td><td class="right"><strong>46%</strong></td></tr>
+        <tr><td>Reserve fund coverage</td><td class="right"><strong>2.8% of AUF</strong></td></tr>
+        <tr><td>Insured receivable exposure</td><td class="right"><strong>31%</strong></td></tr>
+        <tr><td>Weighted average remaining tenor</td><td class="right"><strong>62 days</strong></td></tr>
+      </tbody></table>
+    </div>
+  </div>
+  <div class="grid-3 performance-section">
+    <div class="card"><h3>Monthly origination</h3><p>AED 9.4M originated this month across 14 verified receivables. Average ticket size AED 671K.</p></div>
+    <div class="card"><h3>Repayment monitoring</h3><p>Upcoming maturities are monitored by buyer, due date, notice status and expected payment window.</p></div>
+    <div class="card"><h3>Investor diversification</h3><p>Investor exposure is monitored by buyer, sector, tenor, grade, geography and token ownership percentage.</p></div>
+  </div>
+</div><div class="app-view" id="smeApp">
+  <div class="grid-4">
+    <div class="card"><div class="metric-label">Credit score</div><div class="metric-value">742</div><p>Indicative SME grade B+ / 900</p></div>
+    <div class="card"><div class="metric-label">Available limit</div><div class="metric-value">AED 5M</div><p>Subject to buyer confirmation</p></div>
+    <div class="card"><div class="metric-label">Advance rate</div><div class="metric-value">90%</div><p>For registered government and GRE buyers</p></div>
+    <div class="card"><div class="metric-label">Target disbursement</div><div class="metric-value">48h</div><p>After verification approval</p></div>
+  </div>
+  <div class="card" style="margin-top:20px;max-width:900px">
+    <h3>Submit invoice for tokenisation</h3>
+    <p style="color:var(--muted);margin:6px 0 18px">Select the paying buyer, enter invoice details, and submit the receivable for KYB, buyer confirmation, legal assignment and tokenisation.</p>
+    <div class="form-grid">
+      <div class="field"><label>Invoice number</label><input value="INV-2847"></div>
+      <div class="field"><label>Buyer</label><select><option>ADNOC Group — Registered government-linked buyer</option>
+<option>ADNOC Distribution — Registered government-linked buyer</option>
+<option>ADNOC Drilling — Registered government-linked buyer</option>
+<option>TAQA — Abu Dhabi National Energy Company — Registered buyer</option>
+<option>Masdar — Abu Dhabi Future Energy Company — Registered buyer</option>
+<option>Mubadala Investment Company — Registered government-owned buyer</option>
+<option>ADQ — Abu Dhabi Developmental Holding Company — Registered government-owned buyer</option>
+<option>Etihad Airways — Registered government-owned buyer</option>
+<option>Etihad Rail — Registered government-backed buyer</option>
+<option>Abu Dhabi Ports Group — Registered government-linked buyer</option>
+<option>Aldar Properties — Registered government-linked buyer</option>
+<option>Department of Finance Abu Dhabi — Registered government entity</option>
+<option>Department of Municipalities and Transport Abu Dhabi — Registered government entity</option>
+<option>Dubai Electricity and Water Authority DEWA — Registered government entity</option>
+<option>Roads and Transport Authority Dubai RTA — Registered government entity</option>
+<option>Dubai Municipality — Registered government entity</option>
+<option>Dubai Holding — Registered government-owned buyer</option>
+<option>Dubai World Trade Centre — Registered government entity</option>
+<option>Emirates Group — Registered government-owned buyer</option>
+<option>Emirates National Oil Company ENOC — Registered government-owned buyer</option>
+<option>DP World — Registered government-linked buyer</option>
+<option>Jebel Ali Free Zone JAFZA — Registered government-linked buyer</option>
+<option>Dubai South — Registered government-linked buyer</option>
+<option>Expo City Dubai — Registered government-linked buyer</option>
+<option>Sharjah Electricity, Water and Gas Authority SEWA — Registered government entity</option>
+<option>Sharjah Asset Management — Registered government-owned buyer</option>
+<option>Beeah Group — Registered government-linked buyer</option>
+<option>RAK Properties — Registered government-linked buyer</option>
+<option>Etihad Water and Electricity — Registered federal utility buyer</option>
+<option>Emirates Global Aluminium EGA — Registered government-linked buyer</option>
+<option>Other buyer — requires full counterparty review</option></select></div>
+      <div class="field"><label>Invoice amount</label><input value="AED 1,000,000"></div>
+      <div class="field"><label>Payment terms</label><select><option>30 days</option><option>45 days</option><option>60 days</option><option selected>90 days</option><option>120 days</option></select></div>
+    </div>
+    <div class="note" style="margin-top:16px"><strong>Estimated output:</strong> Grade is generated after buyer confirmation, document checks and counterparty review. Government and GRE buyers may qualify for higher advance rates and lower target yields.</div>
+    <button class="btn primary" style="margin-top:16px" onclick="toast('Invoice submitted for KYB, buyer confirmation and tokenisation')">Submit for verification</button>
+  </div>
+</div><div class="app-view" id="bankApp">
+  <div class="bank-role-tabs">
+    <div class="role-card">
+      <div class="eyebrow">Bank as investor</div>
+      <h3>Invested in receivable pools</h3>
+      <p>Banks can allocate treasury capital into diversified receivable pools by grade, tenor, buyer type and concentration limits.</p>
+      <div class="ticket-row"><span>Invested amount</span><strong>AED 25M</strong></div>
+      <div class="ticket-row"><span>Average yield</span><strong>6.2%</strong></div>
+      <div class="ticket-row"><span>Active token positions</span><strong>18</strong></div>
+    </div>
+    <div class="role-card">
+      <div class="eyebrow">Bank as originator</div>
+      <h3>Referred SME receivables</h3>
+      <p>Banks can refer SME clients they cannot efficiently lend to directly, while earning referral or servicing fees.</p>
+      <div class="ticket-row"><span>Referred SMEs</span><strong>47</strong></div>
+      <div class="ticket-row"><span>Converted deals</span><strong>31</strong></div>
+      <div class="ticket-row"><span>Referral fees YTD</span><strong>AED 284K</strong></div>
+    </div>
+  </div>
+  <div class="grid-4">
+    <div class="card"><div class="metric-label">Referral fees</div><div class="metric-value">AED 284K</div><p>Year-to-date demo</p></div>
+    <div class="card"><div class="metric-label">Treasury deployed</div><div class="metric-value">AED 25M</div><p>Receivable pools</p></div>
+    <div class="card"><div class="metric-label">Average yield</div><div class="metric-value">6.2%</div><p>Bank treasury allocation</p></div>
+    <div class="card"><div class="metric-label">SME referrals</div><div class="metric-value">47</div><p>Converted deals</p></div>
+  </div>
+  <div class="table-wrap bank-section">
+    <div class="table-title"><strong>Bank referral pipeline</strong><span class="badge dark">Originated receivables</span></div>
+    <table class="kpi-table"><thead><tr><th>SME client</th><th>Receivable</th><th>Grade</th><th>Amount</th><th>Status</th><th>Bank fee</th></tr></thead><tbody>
+      <tr><td>Al Noor Steel LLC</td><td>TF-2847</td><td><span class="badge green">A</span></td><td>AED 1,000,000</td><td>Funded</td><td>AED 3,125</td></tr>
+      <tr><td>Reem Trading LLC</td><td>TF-2831</td><td><span class="badge blue">B</span></td><td>AED 580,000</td><td>Active</td><td>AED 1,813</td></tr>
+      <tr><td>Gulf Metal Works</td><td>TF-2801</td><td><span class="badge amber">C</span></td><td>AED 2,400,000</td><td>Pending review</td><td>Pending</td></tr>
+    </tbody></table>
+  </div>
+</div>
+</div></div></section>
+<div class="modal" id="dealModal">
+  <div class="modal-card">
+    <div class="modal-head">
+      <h3 id="modalTitle">Abu Dhabi Infrastructure Receivable</h3>
+      <button class="close" onclick="closeDeal()">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="metric-grid">
+        <div class="metric"><div class="metric-label">AI score</div><div class="metric-value" id="modalScore">842</div><div class="metric-note" id="modalGrade">Grade A</div></div>
+        <div class="metric"><div class="metric-label">Target yield</div><div class="metric-value" id="modalYield">5.8%</div><div class="metric-note">Net annualised</div></div>
+        <div class="metric"><div class="metric-label">Tenor</div><div class="metric-value">90d</div><div class="metric-note">Buyer payment date</div></div>
+        <div class="metric"><div class="metric-label">Reserve</div><div class="metric-value">2.5%</div><div class="metric-note">First-loss allocation</div></div>
+      </div>
+
+      <div class="modal-balanced">
+        <section class="modal-panel">
+          <h3>AI score breakdown</h3>
+          <div class="factor-list">
+            <div class="factor-row"><span>Buyer quality</span><div class="factor-bar"><i style="width:92%"></i></div><strong>92</strong></div>
+            <div class="factor-row"><span>Payment history</span><div class="factor-bar"><i style="width:88%"></i></div><strong>88</strong></div>
+            <div class="factor-row"><span>Documentation quality</span><div class="factor-bar"><i style="width:96%"></i></div><strong>96</strong></div>
+            <div class="factor-row"><span>Concentration risk</span><div class="factor-bar"><i style="width:74%"></i></div><strong>74</strong></div>
+            <div class="factor-row"><span>Sector and macro risk</span><div class="factor-bar"><i style="width:78%"></i></div><strong>78</strong></div>
+          </div>
+        </section>
+
+        <section class="modal-panel">
+          <h3>Counterparty profile</h3>
+          <table class="compact-table"><tbody>
+            <tr><td>Counterparty type</td><td id="modalCounterpartyType">Government-linked buyer</td></tr>
+            <tr><td>Payment term</td><td>90 days</td></tr>
+            <tr><td>Payment history</td><td>24 months reviewed</td></tr>
+            <tr><td>Default risk</td><td id="modalDefaultRisk">Low</td></tr>
+            <tr><td>Concentration risk</td><td>Monitored against limits</td></tr>
+            <tr><td>Invoice status</td><td>Verified before listing</td></tr>
+          </tbody></table>
+        </section>
+      </div>
+
+      <div class="modal-balanced">
+        <section class="modal-panel">
+          <h3>Documents verified</h3>
+          <table class="compact-table"><tbody>
+            <tr><td>Invoice</td><td>Verified</td></tr>
+            <tr><td>Purchase order</td><td>Verified</td></tr>
+            <tr><td>Delivery note</td><td>Verified</td></tr>
+            <tr><td>Buyer confirmation</td><td>Confirmed</td></tr>
+          </tbody></table>
+        </section>
+
+        <section class="modal-panel">
+          <h3>Legal assignment status</h3>
+          <p>Assignment prepared for SPV transfer with notice to buyer and repayment direction to the SPV collection account.</p>
+          <h3 style="margin-top:18px">Reserve / insurance</h3>
+          <p>Reserve allocation applied by grade. Insurance may be required for lower-grade receivables or concentrated buyers.</p>
+        </section>
+      </div>
+
+      <section class="modal-panel">
+        <h3>Repayment waterfall</h3>
+        <table class="compact-table"><tbody>
+          <tr><td>1. Buyer repayment</td><td>Paid into SPV collection account</td></tr>
+          <tr><td>2. Platform and servicing fees</td><td>Deducted according to deal terms</td></tr>
+          <tr><td>3. Investor principal</td><td>Returned by token ownership share</td></tr>
+          <tr><td>4. Investor yield</td><td>Distributed net of fees</td></tr>
+          <tr><td>5. Reserve release</td><td>Released after settlement completion</td></tr>
+        </tbody></table>
+        <div class="note" style="margin-top:16px"><strong>Token:</strong> TF-2847 · <strong>Ownership record:</strong> 10,000 units = AED 100,000 exposure · <strong>Settlement:</strong> Primary funding now; secondary eligibility after lock-up.</div>
+        <button class="btn gold block" style="margin-top:16px" onclick="toast('Investment ticket generated')">Generate investment ticket</button>
+      </section>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+<script>
+function openPortal(type){document.getElementById('marketing').style.display='none';document.getElementById('portal').classList.add('active');document.body.classList.add('portal-open');document.getElementById('siteHeader').style.display='none';const map={investor:'portfolioApp',sme:'smeApp',bank:'bankApp',analytics:'analyticsApp'};showAppById(map[type]||'portfolioApp');window.scrollTo(0,0)}
+function showMarketing(){document.getElementById('portal').classList.remove('active');document.body.classList.remove('portal-open');document.getElementById('marketing').style.display='block';document.getElementById('siteHeader').style.display='block';window.scrollTo(0,0)}
+function showApp(id,btn){showAppById(id);document.querySelectorAll('.side-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active')}
+function showAppById(id){
+  document.querySelectorAll('.app-view').forEach(v=>v.classList.remove('active'));
+  const target=document.getElementById(id);
+  if(target) target.classList.add('active');
+  const titles={portfolioApp:'Investor portfolio',marketApp:'Deal marketplace',ownershipApp:'Token ownership',secondaryApp:'Secondary order book',analyticsApp:'Platform statistics',smeApp:'SME application',bankApp:'Bank partner'};
+  const title=document.getElementById('portalTitle');
+  if(title) title.textContent=titles[id]||'Investor portfolio';
+  document.querySelectorAll('.side-btn').forEach(b=>b.classList.toggle('active',b.textContent===titles[id]));
+}
+window.openDeal = function(type){
+  const data={
+    A:['Abu Dhabi Infrastructure Receivable','842','Grade A','5.8%','Government-linked buyer','Low'],
+    B:['Emaar Construction Supply Chain','731','Grade B','7.2%','Corporate buyer','Moderate-low'],
+    C:['Subcontractor Receivable','612','Grade C','11.5%','Private buyer','Moderate']
+  }[type] || ['Detailed Deal Room','842','Grade A','5.8%','Government-linked buyer','Low'];
+  const set=(id,val)=>{const el=document.getElementById(id); if(el) el.textContent=val};
+  set('modalTitle',data[0]); set('modalScore',data[1]); set('modalGrade',data[2]); set('modalYield',data[3]);
+  set('modalCounterpartyType',data[4]); set('modalDefaultRisk',data[5]);
+  const modal=document.getElementById('dealModal');
+  if(modal){ modal.classList.add('active'); document.body.style.overflow='hidden'; }
+}
+window.closeDeal = function(){
+  const modal=document.getElementById('dealModal');
+  if(modal){ modal.classList.remove('active'); document.body.style.overflow=''; }
+}
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.style.display='block';setTimeout(()=>t.style.display='none',3200)}
+const dealModalEl=document.getElementById('dealModal'); if(dealModalEl){dealModalEl.addEventListener('click',e=>{if(e.target.id==='dealModal')closeDeal()})}
+
+let currentTicket={token:'TF-2847',yield:5.8,min:10000,capacity:3200000};
+function openTicket(token,yieldRate,min,capacity){
+  currentTicket={token:token,yield:parseFloat(yieldRate),min:parseInt(min),capacity:parseInt(capacity)};
+  document.getElementById('ticketToken').textContent=token;
+  document.getElementById('ticketYield').textContent=yieldRate+'% target net yield';
+  document.getElementById('ticketYieldValue').textContent=yieldRate+'%';
+  const input=document.getElementById('ticketAmount');
+  input.min=min; input.value=Math.max(parseInt(min),25000);
+  document.getElementById('ticketMin').textContent='Minimum allocation: AED '+Number(min).toLocaleString();
+  document.getElementById('ticketCapacity').textContent='AED '+Number(capacity).toLocaleString();
+  updateTicket();
+  const ticketModal=document.getElementById('ticketModal'); if(ticketModal) ticketModal.classList.add('active');
+}
+function closeTicket(){const el=document.getElementById('ticketModal'); if(el) el.classList.remove('active')}
+function updateTicket(){
+  const input=document.getElementById('ticketAmount');
+  let amount=parseInt(input.value||0);
+  if(amount<currentTicket.min){amount=currentTicket.min}
+  const units=Math.floor(amount/1000);
+  const est=Math.round(amount*(currentTicket.yield/100)*(90/365));
+  document.getElementById('ticketUnits').textContent=units.toLocaleString();
+  document.getElementById('ticketReturn').textContent='AED '+est.toLocaleString();
+}
+
+</script>
+</body>
+</html>
